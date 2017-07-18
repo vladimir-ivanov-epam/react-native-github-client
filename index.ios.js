@@ -12,7 +12,7 @@ import {
   View
 } from 'react-native';
 
-export default class MyGitHub extends Component {
+export default class MyGitHub_v2 extends Component {
   render() {
     return (
       <View style={styles.container}>
@@ -50,4 +50,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('MyGitHub', () => MyGitHub);
+AppRegistry.registerComponent('MyGitHub_v2', () => MyGitHub_v2);
