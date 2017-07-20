@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import storage from './storage.js';
 
-async function isAuthenticated() {  
+async function isAuthenticated() {
   return await storage.hasAuthToken();
 }
 
@@ -19,11 +19,12 @@ async function login(username, password) {
       method: 'post',
       auth: { username, password },
       data: {
-        note: `react-native-github-client`
+        note: `react-native-github-client`,
+        scopes: ['read:user', 'public_repo']
       }
     });
 
-    token = response && response.data && response.data.token;
+    const token = response && response.data && response.data.token;
 
     if (token) {
       await storage.setAuthToken(token);
