@@ -1,11 +1,13 @@
 
-import React, { PureComponent } from 'react';
+import React from 'react';
+import { StackNavigator } from 'react-navigation';
 
-import Login from './routes/login'
+import Login from './routes/login';
+import User from './routes/user';
 
-export default class App extends PureComponent {
-  
-  render() {
-    return <Login />;
-  }
-}
+export default StackNavigator({
+  Login: { screen: Login },
+  User: { screen: User }
+}, {
+  headerMode: 'none'
+});

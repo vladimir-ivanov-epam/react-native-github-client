@@ -1,6 +1,6 @@
 
-import React, { PureComponent } from 'react';
-import { View, Text } from 'react-native';
+import React from 'react';
+import { View, Text, Alert } from 'react-native';
 
 import TextInput from '../../components/textInput';
 import PasswordInput from '../../components/passwordInput';
@@ -9,72 +9,46 @@ import Loader from '../../components/loader';
 
 import styles from './styles.js';
 
-export default class Login extends PureComponent {
+const Login = ({ username, password, isLoading, isSubmitting, onInputChange, onSubmit }) => {
 
-  constructor(props) {
-    
-    super(props);
+  const form = (
+    <View>
+      <Text style={ styles.logo }>GitHub</Text>        
+      
+      <TextInput          
+        placeholder="Username"
+        autoCorrect={ false }
+        value={ username }
+        onChangeText={ (value) => onInputChange({ username: value }) } />
 
-    this.state = {      
-      login: '',
-      password: '',
+      <PasswordInput 
+        value={ password }
+        onChangeText={ (value) => onInputChange({ password: value }) } />
 
-      isLoading: false,
-      isErred: false
-    };
-
-    this.onSubmit = this.onSubmit.bind(this);
-
-  }
-
-  onSubmit() {
-
-    this.setState({ isLoading: true, isErred: false });
-    
-    setTimeout(() => {
-      this.setState({ isLoading: false, isErred: true })
-    }, 3000);
-
-  }
-
-  render() {
-
-    const { login, password, isLoading, isErred } = this.state;
-
-    return (
-      <View style={ styles.container }>
+      <View style={ styles.statusWrapper }>
         
-        <Text style={ styles.logo }>GitHub</Text>        
-        
-        <TextInput          
-          placeholder="Login"
-          autoCorrect={ false }
-          value={ login }
-          onChangeText={ (value) => this.setState({ login: value }) } />
-
-        <PasswordInput 
-          value={ password }
-          onChangeText={ (value) => this.setState({ password: value }) } />
-
-        <View style={ styles.statusWrapper }>
-          
-          { isLoading && <Loader size="large" /> }
-
-          { 
-            isErred && 
-            <Text style={ styles.errorMessage }>Login and/or password are incorrect</Text> 
-          }
-
-        </View>
-
-        <Button          
-          disabled={ isLoading || !login || !password }
-          title="Submit"
-          onPress={ this.onSubmit } />
-
+        { isSubmitting && <Loader size="large" /> }
+      
       </View>
-    );
 
-  } 
+      <Button          
+        disabled={ isSubmitting || !username || !password }
+        title="Submit"
+        onPress={ onSubmit } />
 
-}
+    </View>
+  );
+
+
+  return (
+    <View style={ styles.container }>
+
+      {
+        isLoading ? <Loader /> : form
+      }
+      
+    </View>
+  );
+};
+
+export default Login;

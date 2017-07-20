@@ -9,7 +9,7 @@ export default StyleSheet.create({
     flex: 1,
     padding: 30,
     backgroundColor: theme.backgroundColor,
-    justifyContent: 'center'    
+    justifyContent: 'center'
   },
 
   logo: {    
