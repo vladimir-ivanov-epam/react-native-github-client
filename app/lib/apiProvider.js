@@ -23,16 +23,16 @@ async function login(username, password) {
       }
     });
 
-    token = response && response.data && response.data.token;    
+    token = response && response.data && response.data.token;
 
     if (token) {
       await storage.setAuthToken(token);
     }
-    
+
   } catch (error) {
-    
+
   }
-  
+
   return await isAuthenticated();
 }
 
@@ -41,16 +41,16 @@ async function getUser() {
   const token = await storage.getAuthToken();
 
   const response = await axios({
-    url: 'https://api.github.com/user',    
+    url: 'https://api.github.com/user',
     headers: {
       'Authorization': `token ${token}`
     }
   });
 
-  return response;
+  return response.data;
 }
 
-export default { 
+export default {
   isAuthenticated,
   login,
   logout,

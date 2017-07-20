@@ -1,33 +1,44 @@
 
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 
-import apiProvider from '../../lib/apiProvider.js';
+import { getUser } from "../../ducks/user.js";
 
 import User from './User.js';
 
-export default class UserContainer extends PureComponent {
+class UserContainer extends PureComponent {
 
   constructor(props) {
 
     super(props);
 
     this.state = {
-      isLoading: true,
-      userData: null
+      isLoading: true
     };
 
   }
 
-  async componentDidMount() {    
+  async componentDidMount() {
 
-    const { data: userData } = await apiProvider.getUser();
+    await this.props.getUser();
     
-    this.setState({ userData, isLoading: false });
+    this.setState({ isLoading: false });
     
   }  
 
   render() {
-    return <User { ...this.state } />;
+
+    const { user } = this.props;
+
+    return <User { ...this.state } user={ user } />;
   }
 
 }
+
+export default connect(
+
+  ({ user }) => ({ user }),
+
+  { getUser }
+
+)(UserContainer);

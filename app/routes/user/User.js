@@ -7,12 +7,12 @@ import Loader from '../../components/loader';
 
 import styles from './styles.js';
 
-const User = ({ userData, isLoading }) => {
+const User = ({ user, isLoading }) => {
 
-  const userProfile = userData && (
+  const userProfile = user && (
     <View>
-      <Image source={{ uri: userData.avatar_url }} style={ styles.avatar } />      
-      <Text style={ styles.name }>{ userData.login }</Text>
+      <Image source={{ uri: user.avatar_url }} style={ styles.avatar } />
+      <Text style={ styles.name }>{ user.login }</Text>
     </View>
   );
 
@@ -23,6 +23,6 @@ const User = ({ userData, isLoading }) => {
 
     </View>
   ); 
-}
+};
 
 export default User;
