@@ -1,4 +1,4 @@
-package com.albums;
+package com.githubclient;
 
 import android.app.Application;
 
