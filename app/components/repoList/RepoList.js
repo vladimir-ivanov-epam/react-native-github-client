@@ -2,6 +2,8 @@
 import React from 'react';
 import { FlatList, View, Text } from 'react-native';
 
+import Icon from 'react-native-vector-icons/Entypo';
+
 import styles from './styles.js';
 
 const RepoList = ({ repos }) => {
@@ -10,7 +12,7 @@ const RepoList = ({ repos }) => {
     <View style={ styles.item }>
       <Text style={ styles.name } >{ item.name }</Text>
       <Text style={ styles.stargazers }>{ item.stargazers_count }</Text>
-      <Text>star</Text>
+      <Icon name="star" size={ 22 } color="gold" />
     </View>
   );
 
