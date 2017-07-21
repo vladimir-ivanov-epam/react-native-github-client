@@ -2,7 +2,8 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
-import { getUser } from "../../ducks/user.js";
+import { getUser } from '../../ducks/user.js';
+import { getRepos } from '../../ducks/repos.js';
 
 import User from './User.js';
 
@@ -12,33 +13,38 @@ class UserContainer extends PureComponent {
 
     super(props);
 
-    this.state = {
-      isLoading: true
-    };
+    this.state = { isFetchingRepos: true };
 
   }
 
   async componentDidMount() {
 
     await this.props.getUser();
+    await this.fetchRepos();
     
-    this.setState({ isLoading: false });
-    
-  }  
+  }
+
+  async fetchRepos() {
+
+    this.setState({ isFetchingRepos: true });
+    await this.props.getRepos();
+    this.setState({ isFetchingRepos: false });
+
+  }
 
   render() {
 
-    const { user } = this.props;
+    const { user, repos } = this.props;
 
-    return <User { ...this.state } user={ user } />;
+    return <User { ...this.state } user={ user } repos={ repos } />;
   }
 
 }
 
 export default connect(
 
-  ({ user }) => ({ user }),
+  ({ user, repos }) => ({ user, repos }),
 
-  { getUser }
+  { getUser, getRepos }
 
 )(UserContainer);

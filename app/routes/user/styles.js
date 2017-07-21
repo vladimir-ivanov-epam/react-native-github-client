@@ -7,25 +7,23 @@ export default StyleSheet.create({
 
   container: {
     flex: 1,
-    padding: 30,
-    backgroundColor: theme.backgroundColor,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-
-  avatar: {
-    borderWidth: 1,
-    borderColor: theme.secondaryColor,
-    borderRadius: 5,
-    width: 200,
-    height: 200
+    backgroundColor: theme.backgroundColor
   },
 
   name: {
-    fontSize: 32,
+    fontSize: 15,
     color: theme.fontColor,
-    marginTop: 15,
-    textAlign: 'center'    
+    textAlign: 'center',
+    padding: 5,
+    backgroundColor: '#2a2a2a',
+    borderBottomWidth: 1,
+    borderColor: theme.secondaryColor
+  },
+
+  sectionTitle: {
+    fontSize: 28,
+    padding: 15,
+    color: theme.fontColor
   }
 
 });

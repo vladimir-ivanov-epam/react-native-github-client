@@ -37,12 +37,12 @@ async function login(username, password) {
   return await isAuthenticated();
 }
 
-async function getUser() {
+async function makeApiCall(endpoint) {
 
   const token = await storage.getAuthToken();
 
   const response = await axios({
-    url: 'https://api.github.com/user',
+    url: `https://api.github.com/${ endpoint }`,
     headers: {
       'Authorization': `token ${token}`
     }
@@ -51,9 +51,13 @@ async function getUser() {
   return response.data;
 }
 
+const getUser = makeApiCall.bind(null, 'user');
+const getRepos = makeApiCall.bind(null, 'user/repos');
+
 export default {
   isAuthenticated,
   login,
   logout,
-  getUser
+  getUser,
+  getRepos
 };
