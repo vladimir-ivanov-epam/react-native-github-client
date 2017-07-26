@@ -1,24 +1,20 @@
-/**
- * Created by Pavel_Ryabichenko on 17.07.2017.
- */
+import React, {Component} from 'react';
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import reducers from './reducers';
+import AppWithNavigationState from './containers/AppNavigator';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
-import React from "react";
-import {
-    StackNavigator
-} from 'react-navigation';
-import {
-    LoginForm,
-    UserInfo
-} from './containers';
-
-const stackNavigatorConfiguration = {
-    headerMode: 'none',
-    initialRouteName: 'Home'
+class App extends Component {
+    store = createStore(reducers, {}, composeWithDevTools(applyMiddleware(thunk)));
+    render() {
+        return (
+            <Provider store={this.store}>
+                <AppWithNavigationState />
+            </Provider>
+        );
+    }
 };
-const App = StackNavigator({
-    Home: {screen: LoginForm},
-    UserInfo: {screen: UserInfo},
-}, stackNavigatorConfiguration);
-
 
 export default App;
