@@ -1,0 +1,117 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#fff",
+        "borderBottomWidth": 1,
+        "borderColor": "#ddd",
+        "flexDirection": "row",
+        "justifyContent": "flex-start",
+        "padding": 5,
+        "position": "relative",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "flex": 1,
+        }
+      }
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+        style={
+          Array [
+            Object {
+              "fontSize": 18,
+              "paddingLeft": 10,
+            },
+            Object {
+              "textAlign": "left",
+            },
+          ]
+        }
+      >
+        name
+      </Text>
+    </View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+      style={
+        Array [
+          Object {
+            "fontSize": 18,
+            "paddingLeft": 10,
+          },
+          Object {
+            "textAlign": "right",
+          },
+        ]
+      }
+    >
+      1
+    </Text>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "justifyContent": "center",
+          "width": 30,
+        }
+      }
+    >
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        hasTVPreferredFocus={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Array [
+            Object {
+              "backgroundColor": "transparent",
+            },
+            Object {
+              "height": 16,
+              "width": 16,
+            },
+          ]
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Image
+          resizeMode="contain"
+          source={1}
+          style={
+            Object {
+              "height": 16,
+              "width": 16,
+            }
+          }
+        />
+      </View>
+    </View>
+  </View>
+</View>
+`;
