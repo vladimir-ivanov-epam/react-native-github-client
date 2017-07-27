@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Repos async - reposFetchData creates REPOS_FETCH_DATA_SUCCESS when fetching repos has been done 1`] = `
+Array [
+  Object {
+    "isLoading": true,
+    "type": "REPOS_IS_LOADING",
+  },
+]
+`;

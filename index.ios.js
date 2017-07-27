@@ -1,11 +1,4 @@
 import { AppRegistry } from 'react-native';
-import App from './src/components/App';
-import UserInfo from './src/components/UserInfo'
-import { StackNavigator } from 'react-navigation';
+import App from './src/App';
 
-const AppWithNav = StackNavigator({
-    Login: {screen: App},
-    UserInfo: {screen: UserInfo}
-});
-
-AppRegistry.registerComponent('GitHubClient', () => AppWithNav);
+AppRegistry.registerComponent('GitHubClient', () => App);

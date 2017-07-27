@@ -7,7 +7,7 @@ class Inputs extends Component {
         this.state = {
             username: this.props.username,
             password: this.props.password
-        }
+        };
     }
 
     render() {
