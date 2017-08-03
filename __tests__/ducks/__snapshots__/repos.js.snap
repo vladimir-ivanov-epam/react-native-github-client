@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Repos # async/getRepos is expected to trigger set data action with received data 1`] = `
+Array [
+  Object {
+    "reposData": Array [
+      Object {
+        "name": "repo-name",
+        "stargazers_count": 10,
+      },
+    ],
+    "type": "repos/SET_DATA",
+  },
+]
+`;
+
+exports[`Repos # reducer is expected to return appropriate state 1`] = `
+Array [
+  Object {
+    "name": "name",
+  },
+]
+`;
+
+exports[`Repos # setReposData is expected to create SET_DATA action 1`] = `
+Object {
+  "reposData": Array [
+    Object {
+      "name": "name",
+      "stargazers_count": 5,
+    },
+  ],
+  "type": "repos/SET_DATA",
+}
+`;

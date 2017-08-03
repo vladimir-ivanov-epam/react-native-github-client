@@ -1,33 +1,50 @@
 
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 
-import apiProvider from '../../lib/apiProvider.js';
+import { getUser } from '../../ducks/user.js';
+import { getRepos } from '../../ducks/repos.js';
 
 import User from './User.js';
 
-export default class UserContainer extends PureComponent {
+class UserContainer extends PureComponent {
 
   constructor(props) {
 
     super(props);
 
-    this.state = {
-      isLoading: true,
-      userData: null
-    };
+    this.state = { isFetchingRepos: true };
 
   }
 
-  async componentDidMount() {    
+  async componentDidMount() {
 
-    const { data: userData } = await apiProvider.getUser();
+    await this.props.getUser();
+    await this.fetchRepos();
     
-    this.setState({ userData, isLoading: false });
-    
-  }  
+  }
+
+  async fetchRepos() {
+
+    this.setState({ isFetchingRepos: true });
+    await this.props.getRepos();
+    this.setState({ isFetchingRepos: false });
+
+  }
 
   render() {
-    return <User { ...this.state } />;
+
+    const { user, repos } = this.props;
+
+    return <User { ...this.state } user={ user } repos={ repos } />;
   }
 
 }
+
+export default connect(
+
+  ({ user, repos }) => ({ user, repos }),
+
+  { getUser, getRepos }
+
+)(UserContainer);

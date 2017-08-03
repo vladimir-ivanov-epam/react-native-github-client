@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`User # async/getUser is expected to trigger set data action with received data 1`] = `
+Array [
+  Object {
+    "type": "user/SET_DATA",
+    "userData": Object {
+      "name": "Superman",
+    },
+  },
+]
+`;
+
+exports[`User # reducer is expected to return appropriate state 1`] = `
+Object {
+  "login": "login",
+}
+`;
+
+exports[`User # setUserData is expected to create SET_DATA action 1`] = `
+Object {
+  "type": "user/SET_DATA",
+  "userData": Object {
+    "name": "some",
+  },
+}
+`;
