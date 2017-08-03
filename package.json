@@ -9,10 +9,16 @@
 	"dependencies": {
 		"axios": "^0.16.2",
 		"jslint": "^0.10.3",
+		"metro-bundler": "^0.10.0",
+		"nock": "^9.0.14",
 		"react": "^16.0.0-alpha.12",
 		"react-dom": "^15.6.1",
 		"react-native": "^0.46.3",
 		"react-navigation": "^1.0.0-beta.11",
+		"react-redux": "^5.0.5",
+		"redux": "^3.7.2",
+		"redux-mock-store": "^1.2.3",
+		"redux-thunk": "^2.2.0",
 		"webpack": "^3.3.0"
 	},
 	"devDependencies": {
@@ -21,7 +27,7 @@
 		"babel-loader": "^7.1.1",
 		"babel-preset-react-native": "2.1.0",
 		"eslint-config-rallycoding": "^3.2.0",
-		"jest": "20.0.4",
+		"jest": "^20.0.4",
 		"react-test-renderer": "16.0.0-alpha.12"
 	},
 	"jest": {

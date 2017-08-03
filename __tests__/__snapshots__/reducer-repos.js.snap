@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`returns bool 1`] = `true`;
+
+exports[`returns bool 2`] = `true`;
+
+exports[`returns correct state 1`] = `Array []`;

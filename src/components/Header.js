@@ -1,28 +1,29 @@
-import React from 'react';
-import { View, Image } from 'react-native';
+import React, { Component } from 'react';
+import { View, Text } from 'react-native';
 
-const Header = () => {
-    const { viewStyle, imageStyle } = styles;
 
-    return (
-        <View style={viewStyle}>
-            <Image style={imageStyle} source={require('../../images/github-logo.png')} />
-        </View>
-    );
+class Header extends Component {
+
+    render() {
+        return (
+            <View style={styles.viewStyle}><Text style={styles.textStyle}>{this.props.username}</Text></View>
+        );
+    }
 };
 
 const styles = {
     viewStyle: {
-        flex: 1,
-        alignContent: 'center',
-        justifyContent: 'center',
-        /*backgroundColor: '#FF6075'*/
     },
-    imageStyle: {
-        width: 220,
-        height: 90,
-        alignSelf: 'center'
+    textStyle: {
+        fontSize: 18,
+        padding: 10,
+        fontWeight: 'bold',
+        backgroundColor: '#ececec',
+        borderBottomColor: 'black',
+        borderBottomWidth: 1,
+        textAlign: 'center',
+        shadowColor: '#000'
     }
-};
+}
 
 export default Header;

@@ -3,10 +3,6 @@ import { View, Button, Text, ActivityIndicator, StyleSheet  } from 'react-native
 
 class SubmitArea extends Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         const { viewStyle, submitButton, warningText, loadIndicator } = styles;
         return (
@@ -15,9 +11,11 @@ class SubmitArea extends Component {
                 <Text style={warningText}>Login and/or password are incorrect</Text>
                 }
                 {this.props.logining &&
-                <ActivityIndicator size="large" style={loadIndicator}/>
+                <ActivityIndicator size="large" style={loadIndicator} />
                 }
+                {!this.props.logining &&
                 <Button title="Submit" disabled={this.props.logining} onPress={this.props.submitHandler} style={submitButton}/>
+                }
             </View>
         );
     }
