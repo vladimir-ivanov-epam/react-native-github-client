@@ -1,12 +1,11 @@
-import 'react-native';
 import React from 'react';
-import Index from '../index.android.js';
-
-// Note: test renderer must be required after react-native.
 import renderer from 'react-test-renderer';
+import {ListItem} from "../src/components/ListItem";
 
 it('renders correctly', () => {
-  const tree = renderer.create(
-    <Index />
-  );
+    let item = {name: 'name', stargazers_count: 1};
+    const listItem = renderer.create(
+        <ListItem item={item} />
+    ).toJSON();
+    expect(listItem).toMatchSnapshot();
 });

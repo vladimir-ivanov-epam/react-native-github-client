@@ -1,97 +1,44 @@
-/**
- * Created by Pavel_Ryabichenko on 17.07.2017.
- */
-
 import React, { Component } from 'react';
-import {
-    StyleSheet,
-    Text,
-    TextInput,
-    View,
-    ActivityIndicator,
-    Button,
-    AsyncStorage
-} from 'react-native';
-import {Header} from '../components/Header'
-import {getCredentials, setCredentials, loginUser, setUserData, getUserData} from '../services'
+import {Button, StyleSheet, Text, TextInput, View} from 'react-native';
+import { connect } from 'react-redux';
+import { loginChanged, passwordChanged, loginUser } from '../actions';
+import { Header, Spinner} from '../components/common';
 
 class LoginForm extends Component {
-    static navigationOptions = {
-        title: 'Home screen'
-    }
-    constructor(props) {
+    constructor(props)  {
         super(props);
-        this.state = {
-            animating: false,
-            login: '',
-            password: '',
-            valid: true,
-            loading: false
-        }
     }
-
+    static navigationOptions = {
+        title: 'Login'
+    };
     componentWillMount(){
         // Loading saved data
-        this._loadInitialState().done();
+        //console.log('LoginForm will mount');
+    }
+    onLoginChange(text) {
+        this.props.loginChanged(text);
     }
 
-    async _loadInitialState (){
-        getCredentials(['login', 'password'])
-            .then((creds) => {
-                if(creds != null){
-                    var userdata = getUserData();
-                    this.setState(creds);
-                    // if(userdata != null) {
-                    //     this.props.navigation.navigate('UserInfo', {userdata: userdata})
-                    // }
-                    // else{
-                    loginUser(creds)
-                        .then((response) => {
-                            setCredentials(this.state.login, this.state.password)
-                                .then(() => setUserData(response.data).done());
-                        }).catch((error) => {
-                            console.log('error');
-                            alert('Login failed');
-                    });
-                    // }
-                }
-            }
-        );
+    onPasswordChange(text) {
+        this.props.passwordChanged(text);
     }
 
-    _onPressBtn () {
-        // console.log(this.state.login + this.state.password);
-        loginUser({login: this.state.login, password: this.state.password})
-            .then((response) => {
-                if (response.status === 200) {
-                    setCredentials(this.state.login, this.state.password)
-                        .then(() => setUserData(response.data).done());
-                    this.props.navigation.navigate('UserInfo', {userdata: response.data});
-                } else{
-                    alert('Login failed with status ' + response.status);
-                }
-            }).catch((error) => {
-                console.log('Error: ' + error.message);
-                alert('Error: ' + error.message);
-            });
+    onButtonPress() {
+        const { login, password } = this.props;
+        this.props.loginUser({ login, password });
     }
     _renderValidation() {
-        if(!this.state.valid){
-            return <Text style={[styles.validationText]}>
-                Login and/or password are incorrect
-            </Text>
+        return <Text style={[styles.validationText]}>
+            {this.props.error}
+        </Text>
+    }
+    _renderLoadingIndicator() {
+        if (this.props.loading) {
+            return <Spinner size="large" />;
         }
     }
-    _renderLoadingIndicator () {
-        if(this.state.loading)
-            return <ActivityIndicator
-                animating={true}
-                color={'gray'}
-                size={'large'}
-            />
-    }
+
     render() {
-        const { navigate } = this.props.navigation;
         return (
             <View style={styles.container}>
                 <Header/>
@@ -100,29 +47,31 @@ class LoginForm extends Component {
                         placeholder={'Login'}
                         underlineColorAndroid = "transparent"
                         style={styles.textInput}
-                        onChangeText={(login) => this.setState({login})}
-                        value={this.state.login}
+                        onChangeText={this.onLoginChange.bind(this)}
+                        value={this.props.login}
                     />
 
                     <TextInput
                         placeholder={'Password'}
                         underlineColorAndroid = "transparent"
                         style={styles.textInput}
-                        onChangeText={(password) => this.setState({password})}
+                        onChangeText={this.onPasswordChange.bind(this)}
                         secureTextEntry={true}
-                        value={this.state.password}
+                        value={this.props.password}
                     />
+
                     <View style={styles.validation}>
                         {this._renderValidation()}
                         {this._renderLoadingIndicator()}
                     </View>
 
                     <Button
-                        onPress={(e) => this._onPressBtn(e)}
+                        onPress={this.onButtonPress.bind(this)}
                         title="Submit"
                         style={styles.submitBtn} />
                 </View>
             </View>
+
         );
     }
 }
@@ -139,5 +88,13 @@ const styles = StyleSheet.create({
     wrapper:   { paddingVertical: 30},
     inputWrap: { flexDirection: "row", marginVertical: 10, height: 40, borderBottomWidth: 1, borderBottomColor: "#CCC" },
 });
+const mapStateToProps = ({ auth }) => {
+    const { login, password, error, loading } = auth;
+    return { login, password, error, loading };
+};
 
-export { LoginForm };
+export default connect(mapStateToProps, {
+    loginChanged,
+    passwordChanged,
+    loginUser
+})(LoginForm);
