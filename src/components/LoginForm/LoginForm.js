@@ -56,17 +56,17 @@ class LoginForm extends Component {
         />
         <Input
           placeholder={'Password'}
-          secureTextEntry={true}
+          secureTextEntry
           onChange={this.handleTextChange.bind(this)}
           value={this.state.inputValue}
         />
         <View style={styles.container}>
-        <Spinner
-          isLoading={this.state.isLoading}
-        />
-        <ErrorMessage
-          isError={this.state.isError}
-        />
+        {this.state.isLoading &&
+          <Spinner />
+        }
+        {this.state.isError &&
+          <ErrorMessage />
+        }
         <SubmitButton
           onPress={this.handleSubmitButtonTouch.bind(this)}
           disabled={this.state.isDisabled}
